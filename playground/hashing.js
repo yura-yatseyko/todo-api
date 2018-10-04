@@ -1,16 +1,34 @@
 const {SHA256} = require('crypto-js');
 const jwt = require('jsonwebtoken');
-
-var data = {
-  id: 10
-};
-
-var token = jwt.sign(data, '123abc');
-console.log(`Token: ${token}`);
+const bcrypt = require('bcryptjs');
 
 
-var decoded = jwt.verify(token, '123abc');
-console.log('Decoded', decoded);
+var password = '123abc!';
+
+// bcrypt.genSalt(10, (err, salt) => {
+//   bcrypt.hash(password, salt, (err, hash) => {
+//     console.log(hash);
+//   });
+// });
+
+
+var hashedPassword = '$2a$10$Fbyac/XOVAt/hJ//8nA.jOtW20V2JaR9gqx8sycEQuTj1k/YpWy3q';
+
+bcrypt.compare(password, hashedPassword, (err, res) => {
+  console.log(res);
+});
+
+
+// var data = {
+//   id: 10
+// };
+//
+// var token = jwt.sign(data, '123abc');
+// console.log(`Token: ${token}`);
+//
+//
+// var decoded = jwt.verify(token, '123abc');
+// console.log('Decoded', decoded);
 
 
 // var message = 'I am user numbeer 3';
